@@ -26,6 +26,10 @@
                     </Menu>
                     <Menu mnemonicParsing="false" text="Assemble">
                         <items>
+                            <MenuItem mnemonicParsing="false" onAction="#onAssembleClick" style="-fx-font-family: Monospaced; -fx-highlight-text-fill: #ffffff; -fx-text-fill: #ffffff; -fx-background-fill: black;" text="Assemble" />
+                            <MenuItem mnemonicParsing="false" onAction="#onViewListFileClick" style="-fx-font-family: Monospaced; -fx-highlight-text-fill: #ffffff; -fx-text-fill: #ffffff;" text="View List File" />
+                            <MenuItem mnemonicParsing="false" onAction="#onViewObjectFileClick" style="-fx-font-family: Monospaced; -fx-highlight-text-fill: #ffffff; -fx-text-fill: #ffffff;" text="View Object File" />
+                            <MenuItem mnemonicParsing="false" onAction="#onViewSourceFileClick" style="-fx-font-family: Monospaced; -fx-highlight-text-fill: #ffffff; -fx-text-fill: #ffffff;" text="View Source File" />
                         </items>
                     </Menu>
                 </menus>
@@ -34,7 +38,7 @@
                 <content>
                     <TextArea fx:id="textArea" prefHeight="547.0" prefWidth="800.0" style="-fx-control-inner-background:#2B2B2B" styleClass="edge-to-edge">
                         <font>
-                            <Font name="Monospaced Regular" size="16.0" />
+                            <Font name="Monospaced Regular" size="14.0" />
                         </font></TextArea>
                 </content>
             </ScrollPane>

@@ -17,7 +17,7 @@ public class ListFile {
     public void writeToListFile(){
         try {
             FileWriter fileWriter = new FileWriter("copyfile", true);
-            fileWriter.append("\n\n\n----Pass 2-----\n\n");
+            fileWriter.append("\n\n\n---------------Pass 2---------------\n\n");
             for (Line line : lineArrayList){
                 fileWriter.write(line + "\n");
             }

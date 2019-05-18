@@ -4,6 +4,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.stage.FileChooser;
+import mainpackage.Assembler;
 
 import java.io.*;
 import java.util.Optional;
@@ -15,6 +16,7 @@ public class Model {
     private String filename = "Untitled";
     private File file;
     private Controller controller;
+    private boolean sourceFileViewed = true;
 
     public void setController(Controller controller) {
         this.controller = controller;
@@ -47,11 +49,14 @@ public class Model {
             System.out.println("no file selected");
         else
         {
+            controller.getTextArea().setEditable(true);
             this.file = file;
             filePath = file.getPath();
             filename = file.getName();
             Main.primaryStage.setTitle(filename);
             readFromFile(file);
+            changesMade = false;
+
         }
     }
 
@@ -162,6 +167,7 @@ public class Model {
 
     public void newFile() {
         int result;
+        controller.getTextArea().setEditable(true);
 
         if(changesMade)
         {
@@ -181,5 +187,73 @@ public class Model {
             Main.primaryStage.setTitle("Untitled.txt");
         }
 
+    }
+
+    public void assembleClick() {
+        int result;
+
+        if(changesMade)
+        {
+            System.out.println("changes made");
+            result = showSaveDialog();
+            if(result == 1)
+                assemble();
+        }
+        else if(controller.getTextArea().getText().equals(""))
+        {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Empty File");
+            alert.setHeaderText("Your file is empty.");
+
+            ButtonType buttonTypeOne = new ButtonType("Ok");
+
+            alert.getButtonTypes().setAll(buttonTypeOne);
+
+            Optional<ButtonType> buttonResult = alert.showAndWait();
+            if (buttonResult.get() == buttonTypeOne) {
+                System.out.println("ok");
+            }
+        }
+        else
+            assemble();
+    }
+
+    private void assemble() {
+        controller.getMenuBar().getMenus().get(1).getItems().get(1).setDisable(false);
+        controller.getMenuBar().getMenus().get(1).getItems().get(2).setDisable(false);
+        controller.getMenuBar().getMenus().get(1).getItems().get(3).setDisable(false);
+        Assembler.assemble(new File(filePath));
+    }
+
+    public void viewListFile() {
+        controller.getTextArea().setEditable(false);
+        setSourceFileViewed(false);
+        controller.getTextArea().clear();
+        File file = new File("copyfile");
+        readFromFile(file);
+        changesMade = false;
+    }
+
+    public void viewObjectFile() {
+        controller.getTextArea().setEditable(false);
+        setSourceFileViewed(false);
+        controller.getTextArea().clear();
+        File file = new File("objfile");
+        readFromFile(file);
+        changesMade = false;
+    }
+
+    public boolean isSourceFileViewed() {
+        return sourceFileViewed;
+    }
+
+    public void setSourceFileViewed(boolean sourceFileViewed) {
+        this.sourceFileViewed = sourceFileViewed;
+    }
+
+    public void viewSourceFile() {
+        controller.getTextArea().setEditable(true);
+        readFromFile(new File(filePath));
+//        changesMade = false;
     }
 }

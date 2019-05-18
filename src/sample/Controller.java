@@ -8,6 +8,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import mainpackage.Assembler;
 
 
 public class Controller {
@@ -66,8 +67,33 @@ public class Controller {
         model = new Model();
         model.setController(this);
         textArea.textProperty().addListener((observable, oldValue, newValue) -> {
-            model.setChangesMade(true);
+            if(model.isSourceFileViewed())
+                model.setChangesMade(true);
         });
+        menuBar.getMenus().get(1).getItems().get(1).setDisable(true);
+        menuBar.getMenus().get(1).getItems().get(2).setDisable(true);
+        menuBar.getMenus().get(1).getItems().get(3).setDisable(true);
+    }
+
+    public void onAssembleClick(ActionEvent actionEvent) {
+        model.assembleClick();
+    }
+
+    public void onViewListFileClick(ActionEvent actionEvent) {
+        model.viewListFile();
+    }
+
+    public void onViewObjectFileClick(ActionEvent actionEvent) {
+        model.viewObjectFile();
+
+    }
+
+    public void onViewSourceFileClick(ActionEvent actionEvent) {
+        model.viewSourceFile();
+    }
+
+    public MenuBar getMenuBar() {
+        return menuBar;
     }
 }
 

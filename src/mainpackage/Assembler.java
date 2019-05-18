@@ -6,24 +6,25 @@ import files.ObjectFile;
 import files.SourceFile;
 import operation.OperationTable;
 import register.RegisterTable;
+import symbol.SymbolTable;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class Main {
+public class Assembler {
 
-    public static void main(String[] args) {
+    public static void assemble(File file) {
         OperationTable.fillOpTable();
         Error.fillErrorArray();
         RegisterTable.getInstance().fillRegisterTable();
-
+        SymbolTable.getInstance().getSymTab().clear();
         Parser parser = new Parser();
         CopyFile copyFile = new CopyFile();
 
-        ArrayList<String> sourceProgram = SourceFile.readSourceProgramFromFile();
+        ArrayList<String> sourceProgram = SourceFile.readSourceProgramFromFile(file);
         Line currentLine = null;
 
-        System.out.println("ARRAYLIST SIZE IS " + sourceProgram.size());
         for(int i=0; i<sourceProgram.size(); i++)
         {
             System.out.println("\n\nLC = " + LocationCounter.LC);

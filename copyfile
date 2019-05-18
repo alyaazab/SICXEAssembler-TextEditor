@@ -1,0 +1,35 @@
+			.23456789012345678901234567890123456
+			. ALT & Enter to toggle full screen
+			.Label.  Opcode  The  O p e r a n d
+			.
+001000 			myprog  		start 		1000
+001000 			lbl     		word  		5
+001003 			tst     		byte  		c'abc'
+001006 			bgn     		lda   		#3
+001009 			        		ldx   		tst
+00100C 			        		lda   		lbl
+00100F 			test    		EQU   		3+lbl
+00100F 			        		ldx   		tst
+001012 			        		tixr  		s
+001014 			        		rmo   		a,x
+001016 			        		tixr  		a
+001018 			        		rmo   		s,x
+00101A 			        		END   		bgnn
+ ***ERROR: undefined symbol in operand***
+
+
+
+
+-------------------------------------------------------------------------------
+
+						*****SYMBOL TABLE*****
+
+Label Name			Address				Instruction Length		Relocatable
+
+tst                 4099                3                      true                
+lbl                 4096                3                      true                
+bgn                 4102                3                      true                
+myprog              4096                0                      true                
+
+
+errors found, no pass 2

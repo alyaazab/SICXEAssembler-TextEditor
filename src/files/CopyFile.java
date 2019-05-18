@@ -40,7 +40,7 @@ public class CopyFile {
                 fileWriter.write(line + "\n");
             }
             fileWriter.write("\n\n\n-------------------------------------------------------------------------------");
-            fileWriter.write("\n\n\t\t\t\t\t\t*****SYMBOL TABLE*****\n");
+            fileWriter.write("\n\n\t\t\t*****SYMBOL TABLE*****\n");
             fileWriter.write("\nLabel Name\t\t\tAddress\t\t\t\tInstruction Length\t\tRelocatable\n");
 
             Iterator<Symbol> iterator = SymbolTable.getInstance().getSymTab().values().iterator();
@@ -52,7 +52,7 @@ public class CopyFile {
 
 
             if (errorFound){
-                fileWriter.write("\n\n\n" + "errors found, no pass 2");
+                fileWriter.write("\n\n\n" + "---------------INCOMPLETE ASSEMBLY---------------");
             }
 
             fileWriter.close();
