@@ -1,0 +1,24 @@
+.23456789012345678901234567890123456
+. ALT & Enter to toggle full screen
+.Label.  Opcode  The  O p e r a n d
+.
+myprog   start   1000
+lbl      word    5
+tst      byte    c'abc'
+bgn      lda     #3
+         ldx     tst
+         lda     lbl
+test     EQU     #3
+         ldx     tst
+         tixr    s
+         rmo     a,x
+         org     #lbl
+         lda     #tst
+         base    #tst
+         ldx     #8
+         ldx     #5
+         org     bgn
+         lda     lbl
+         tixr    a
+         rmo     s,x
+         END     bgn
